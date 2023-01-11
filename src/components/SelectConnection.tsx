@@ -9,11 +9,12 @@ interface Props {
   connections?: Connection[]
   setConnection: Dispatch<SetStateAction<Connection | undefined>>
   isLoading: boolean
+  vaultUrl?: string
 }
 
-const SelectConnection = ({ jwt, connections, connection, setConnection, isLoading }: Props) => {
+const SelectConnection = ({ jwt, connections, connection, setConnection, isLoading, vaultUrl }: Props) => {
   const redirectToVault = () => {
-    const redirectUrl = `https://vault.apideck.com/session/${jwt}`
+    const redirectUrl = vaultUrl ? vaultUrl : `https://vault.apideck.com/session/${jwt}`
     window.location.href = redirectUrl
   }
 
@@ -30,13 +31,13 @@ const SelectConnection = ({ jwt, connections, connection, setConnection, isLoadi
     }
     if (connection.state === 'available') {
       // Enable integration in vault
-      const redirectUrl = `https://vault.apideck.com/integrations/file-storage/${connection?.service_id}/enable?jwt=${jwt}`
+      const redirectUrl = vaultUrl ? vaultUrl : `https://vault.apideck.com/integrations/file-storage/${connection?.service_id}/enable?jwt=${jwt}`
       window.location.href = redirectUrl
       return
     }
 
     // Redirect to integration settings page
-    const redirectUrl = `https://vault.apideck.com/integrations/file-storage/${connection?.service_id}?jwt=${jwt}`
+    const redirectUrl = vaultUrl ? vaultUrl : `https://vault.apideck.com/integrations/file-storage/${connection?.service_id}?jwt=${jwt}`
     window.location.href = redirectUrl
   }
 
@@ -49,6 +50,7 @@ const SelectConnection = ({ jwt, connections, connection, setConnection, isLoadi
               className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-blue-800 bg-blue-100 border border-blue-200 rounded-md group hover:bg-cool-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-cool-gray-100 focus:ring-blue-600"
               style={{ minWidth: 180 }}
               data-testid="select-connection-button"
+              onClick={(e: React.MouseEvent<HTMLElement>) => {console.log('menu click'); e.stopPropagation()}}
             >
               <div>
                 {!isLoading && connection?.icon && (

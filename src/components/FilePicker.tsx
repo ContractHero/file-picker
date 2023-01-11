@@ -60,6 +60,10 @@ export interface Props {
    * allows to change the file name and select the folder to upload the provided file to
    */
   fileToSave?: File | any
+  /**
+   * Vault url. Allows to overwrite the URL of the vault.
+   */
+  vaultUrl?: string
 }
 
 export const EventsContext = createContext({ onSelect: undefined })
@@ -80,7 +84,8 @@ export const FilePicker = forwardRef<HTMLElement, Props>(function FilePicker(
     showAttribution = true,
     open = false,
     onClose,
-    fileToSave
+    fileToSave,
+    vaultUrl
   },
   ref
 ) {
@@ -112,7 +117,6 @@ export const FilePicker = forwardRef<HTMLElement, Props>(function FilePicker(
       setIsOpen(true)
     }
   }, [open])
-
   return (
     <Fragment>
       {trigger ? React.cloneElement(trigger, { onClick: () => setIsOpen(true), ref }) : null}
@@ -126,6 +130,7 @@ export const FilePicker = forwardRef<HTMLElement, Props>(function FilePicker(
           title={title ? title : fileToSave ? 'Apideck File Uploader' : 'Apideck File Picker'}
           subTitle={subTitle ? subTitle : fileToSave ? 'Select a folder' : 'Select a file'}
           fileToSave={fileToSave}
+          vaultUrl={vaultUrl}
         />
       </Modal>
     </Fragment>

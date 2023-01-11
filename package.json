@@ -11,11 +11,11 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build && yarn build-tailwind",
+    "build": "tsdx build && npm run build-tailwind",
     "test": "tsdx test",
     "test:watch": "tsdx test --watch",
     "lint": "tsdx lint",
-    "prepare": "tsdx build && yarn build-tailwind",
+    "prepare": "tsdx build && npm run build-tailwind",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",

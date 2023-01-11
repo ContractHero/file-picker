@@ -41,6 +41,10 @@ export interface Props {
    * File to save. Forces the FilePicker to go in "Upload" mode and select the folder to upload the provided file
    */
   fileToSave: File
+  /**
+   * Vault url. Allows to overwrite the URL of the vault.
+   */
+  vaultUrl?: string
 }
 
 /**
@@ -54,7 +58,8 @@ export const ModalContent: FC<Props> = ({
   onConnectionSelect,
   title,
   subTitle,
-  fileToSave
+  fileToSave,
+  vaultUrl
 }) => {
   const [connection, setConnection] = useState<Connection>()
 
@@ -121,6 +126,7 @@ export const ModalContent: FC<Props> = ({
           connection={connection}
           setConnection={setConnection}
           isLoading={isLoading}
+          vaultUrl={vaultUrl}
         />
       </div>
       <div
@@ -147,8 +153,8 @@ export const ModalContent: FC<Props> = ({
           <div className="flex items-center justify-center border-2 border-gray-200 border-dashed rounded-lg h-96 empty">
             <div className="text-center">
               <a
-                href={`https://vault.apideck.com/session/${jwt}`}
-                target="_blank"
+                href={vaultUrl ? vaultUrl : `https://vault.apideck.com/session/${jwt}`}
+                target={vaultUrl ? "" : "_blank"}
                 rel="noreferrer"
                 className="text-indigo-600 hover:text-indigo-900"
               >
