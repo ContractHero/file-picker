@@ -34,7 +34,7 @@ export const Modal = React.forwardRef<HTMLDivElement, Props>(function Modal(prop
         <div
           className="fixed inset-0 z-40 flex items-end bg-gray-400 bg-opacity-75 dark:bg-gray-600 sm:items-center sm:justify-center"
           data-testid="backdrop"
-          onClick={() => {console.log('the other click'); onClose()}}
+          onClick={() => onClose()}
         >
           {showAttribution ? (
             <a
@@ -58,7 +58,7 @@ export const Modal = React.forwardRef<HTMLDivElement, Props>(function Modal(prop
             ref={ref}
             role="dialog"
             id="modal-component"
-            onClick={(e: React.MouseEvent<HTMLElement>) => {console.log('this click'); e.stopPropagation()}}
+            onClick={(e: React.MouseEvent<HTMLElement>) => e.stopPropagation()}
             {...other}
           >
             {children}

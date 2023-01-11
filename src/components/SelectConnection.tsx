@@ -50,7 +50,7 @@ const SelectConnection = ({ jwt, connections, connection, setConnection, isLoadi
               className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-blue-800 bg-blue-100 border border-blue-200 rounded-md group hover:bg-cool-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-cool-gray-100 focus:ring-blue-600"
               style={{ minWidth: 180 }}
               data-testid="select-connection-button"
-              onClick={(e: React.MouseEvent<HTMLElement>) => {console.log('menu click'); e.stopPropagation()}}
+              onClick={(e: React.MouseEvent<HTMLElement>) => e.stopPropagation()}
             >
               <div>
                 {!isLoading && connection?.icon && (
